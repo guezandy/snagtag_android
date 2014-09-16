@@ -7,9 +7,12 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
-    
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -25,8 +28,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.andrew.mycloset.ScanScreen"></activity>
-        <activity android:name="com.andrew.mycloset.ClosetScreen"></activity>
+        <activity android:name="com.andrew.mycloset.ScanScreen" >
+        </activity>
+        <activity android:name="com.andrew.mycloset.ClosetScreen" >
+        </activity>
+        <activity
+            android:name="com.andrew.mycloset.Tags_magic"
+            android:label="@string/title_activity_tags_magic"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/com.andrew.mycloset" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/com.andrew.mycloset" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.andrew.mycloset.NfcUtils" >
+        </activity>
+        <activity
+            android:name="com.andrew.mycloset.TagEntity"
+            android:label="@string/title_activity_tag_entity" >
+        </activity>
     </application>
 
 </manifest>

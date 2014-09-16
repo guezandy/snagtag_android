@@ -8,5 +8,16 @@
     <string name="gotoScan">Scan New Item</string>
     <string name="scan">Scanning</string>
     <string name="Scan">Press to begin scanning</string>
+    <string name="title_activity_nfc_beam">NfcBeam</string>
+    <string name="beamMsg">NFC Message</string>
+    <string name="tagWrite">Enable/Disable Tag Writing</string>
+    <string name="title_activity_tags_magic">Tags_magic</string>
+    <string name="beam">Beam NFC Message</string>
+    <string name="NfcWrite">Write to NFC</string>
+    <string name="tagWriting">Enable/Disable Tag Writing</string>
+    <string name="nfcRead">Enable/Disable Nfc Read</string>
+    <string name="tagWrite2">Write Text to Tag</string>
+    <string name="place">placeholder</string>
+    <string name="title_activity_tag_entity">TagEntity</string>
 
 </resources>

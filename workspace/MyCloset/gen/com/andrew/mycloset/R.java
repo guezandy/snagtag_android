@@ -24,27 +24,47 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
+        public static final int action_settings=0x7f080008;
         public static final int gotoClosetbutton=0x7f080000;
-        public static final int nfcToggle=0x7f080002;
+        public static final int nfcOn=0x7f080002;
+        public static final int nfcWriteButton=0x7f080007;
+        public static final int pb1=0x7f080005;
+        public static final int readButton=0x7f080004;
         public static final int scannewbutton=0x7f080001;
+        public static final int writeButton=0x7f080003;
+        public static final int writeNFC=0x7f080006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int closet_screen=0x7f030001;
         public static final int scan_screen=0x7f030002;
+        public static final int tags_magic=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f070000;
+        public static final int nfc_beam=0x7f070001;
+        public static final int tag_entity=0x7f070002;
+        public static final int tags_magic=0x7f070003;
     }
     public static final class string {
+        public static final int NfcWrite=0x7f05000c;
         public static final int Scan=0x7f050006;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int beam=0x7f05000b;
+        public static final int beamMsg=0x7f050008;
         public static final int goToCloset=0x7f050003;
         public static final int gotoScan=0x7f050004;
         public static final int hello_world=0x7f050002;
+        public static final int nfcRead=0x7f05000e;
+        public static final int place=0x7f050010;
         public static final int scan=0x7f050005;
+        public static final int tagWrite=0x7f050009;
+        public static final int tagWrite2=0x7f05000f;
+        public static final int tagWriting=0x7f05000d;
+        public static final int title_activity_nfc_beam=0x7f050007;
+        public static final int title_activity_tag_entity=0x7f050011;
+        public static final int title_activity_tags_magic=0x7f05000a;
     }
     public static final class style {
         /** 

@@ -3,7 +3,7 @@ package com.andrew.mycloset;
 import com.andrew.mycloset.R;
 import com.andrew.mycloset.ScanScreen;
 import com.andrew.mycloset.ClosetScreen;
-
+import com.kinvey.android.*;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	Bundle myValues;
 	private Button toCloset;
 	private Button toScan;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +48,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.scannewbutton:
 			System.out.println("Got to scan");
 			Intent2 = new Intent(MainActivity.this, ScanScreen.class);
+			System.out.println("Intent defined");
 			startActivity(Intent2);
+			System.out.println("Case complete problem isn't in main");
 			break;
 		}
 	}

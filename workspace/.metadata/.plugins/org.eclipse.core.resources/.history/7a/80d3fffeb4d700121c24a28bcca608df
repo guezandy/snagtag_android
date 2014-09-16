@@ -1,0 +1,20 @@
+package com.andrew.mycloset;
+
+import java.util.HashMap;
+import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.graphics.Bitmap;
+
+import com.google.api.client.json.GenericJson;
+import com.google.api.client.util.Key;
+
+public class clothingEntity extends GenericJson {
+	@Key
+	private String nfc_id;
+	@Key
+	private String c_type;
+	@Key
+	private String imageURL;
+}

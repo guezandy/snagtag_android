@@ -1,10 +1,12 @@
 package com.andrew.mycloset;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,45 +18,51 @@ import android.nfc.*;
 import android.nfc.tech.*;
 
 	
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
-	public class ScanScreen extends Activity {
-		//herepublic PendingIntent nfcPendingEvent;
-		private ToggleButton nfcOn;
-		private boolean isEnabled;
-		@Override
-	    public void onCreate(Bundle savedInstanceState) {
-	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.scan_screen);
-	        nfcOn=(ToggleButton) findViewById(R.id.nfcToggle);
-	    }
+public class ScanScreen extends Activity implements OnClickListener{
+	private Button nfcRead;
+	private Button nfcWrite;
+	Intent nfcReadInt;
+	Intent nfcWriteInt;
 		
-		@Override
-		public void onStart() {
-			super.onStart();
-			 NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
-			 //herenfcPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, this.getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-		       // --- for API 10 only
-		       // NfcAdapter adapter = NfcAdapter.getDefaultAdapter(context);
-		       if(adapter != null) {
-		        // true if enabled, false if not
-		        boolean isEnabled = adapter.isEnabled();
-		       }
-		       //if(isEnabled) { TODO LATER left it to do stuff without nfc
-		    	   System.out.println("-----Inside setup Function-----");
-		    	   nfcOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-		    		   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		    			   if (isChecked) {
-		    				   System.out.println("-----Toggle Button On------");
-		    				   Toast.makeText(ScanScreen.this, "NFC Enabled", Toast.LENGTH_LONG).show();
-		    				   // The toggle is enabled
-		    			   } else {
-		    				   System.out.println("----Toggle button off-----");
-		    				   Toast.makeText(ScanScreen.this, "NFC Disabled", Toast.LENGTH_LONG).show();
-		    				   // The toggle is disabled
-		    			   }
-		    		   }
-		    	   });
-		    	   
-		       }
-		       //else {}
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.scan_screen);
+	    System.out.println("Before Button defined"); 
+	    nfcRead=(Button) findViewById(R.id.readButton);
+	    nfcRead.setOnClickListener(this);
+	    nfcWrite= (Button) findViewById(R.id.writeButton);
+	    nfcWrite.setOnClickListener(this);
+	    System.out.println("OnCreate executed");
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public void dostuff() {
+	}
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()){
+		default : 
+			System.out.println("Eddies a nice person");
+			break;
+		case R.id.readButton:
+			System.out.println("Go to Beam activity");
+			nfcReadInt = new Intent(ScanScreen.this, Tags_magic.class);
+			startActivity(nfcReadInt);
+			break;
+		case R.id.writeButton:
+			System.out.println("Go to NFC Write");
+			nfcWriteInt = new Intent(ScanScreen.this, Tags_magic.class);
+			startActivity(nfcWriteInt);
+			break;
+			//1 more case nfc read!
 		}
+
+				
+		
+	}
+}

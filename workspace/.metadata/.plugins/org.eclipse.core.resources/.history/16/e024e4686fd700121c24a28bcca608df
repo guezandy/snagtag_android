@@ -1,0 +1,143 @@
+package com.andrew.mycloset;
+
+import java.util.ArrayList;
+import java.util.List;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.os.Build;
+import android.os.Bundle;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+public class Tags_magic extends Activity {
+	private Button EnableWriteButton;
+	private EditText Text;
+	private NfcAdapter myNfc;
+	private ProgressBar myProg;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tags_magic);
+		//initialize everything
+		Text = (EditText) findViewById(R.id.writeNFC);
+		
+		myProg = (ProgressBar) findViewById(R.id.pb1);
+		myProg.setVisibility(View.GONE);
+		
+		EnableWriteButton= (Button) findViewById(R.id.nfcWriteButton);
+		EnableWriteButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v){
+				setTagWriteReady(!isWriteReady);
+				myProg.setVisibility(isWriteReady ? View.VISIBLE: View.GONE);
+			}
+		});
+		
+		myNfc = NfcAdapter.getDefaultAdapter(this);
+		if(myNfc ==null) {
+			Toast.makeText(this, "Not NFC capable device", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	private boolean isWriteReady = false;
+	
+	public void setTagWriteReady(boolean isWriteReady) {
+		this.isWriteReady = isWriteReady;
+		if(isWriteReady) {
+			IntentFilter[] writeTagFilters = new IntentFilter[] {
+					new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED) };
+			myNfc.enableForegroundDispatch(Tags_magic.this, 
+					NfcUtils.getPendingIntent(Tags_magic.this), writeTagFilters, null);
+			System.out.println("Enabled Foreground dispatch");	
+		}
+		else {
+			myNfc.disableForegroundDispatch(Tags_magic.this);
+			System.out.println("Disable Foreground Dispatch");
+		}
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.tags_magic, menu);
+		return true;
+	}
+	@Override
+	public void onNewIntent(Intent intent) {
+		setIntent(intent);
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		if(isWriteReady && myNfc.ACTION_TAG_DISCOVERED.equals(
+				getIntent().getAction())) {
+				processWriteIntent(getIntent());
+			}
+		else if (!isWriteReady && (NfcAdapter.ACTION_TAG_DISCOVERED.equals(
+				getIntent().getAction()) || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction() ))) {
+			processReadIntent(getIntent());
+			}
+		}
+	//process for reading NFC Tags
+	private void processReadIntent(Intent intent) {
+		List<NdefMessage> intentMessages = NfcUtils.getMessagesFromIntent(intent);
+		List<String> payloadStrings = new ArrayList<String>(intentMessages.size());
+		
+		for(NdefMessage message : intentMessages) {
+			for(NdefRecord record : message.getRecords()) {
+				byte[] payload = record.getPayload();//append if not getting entire message
+				String payloadString = new String(payload);//payloadstring += payload
+				System.out.println(payload + " , " + payloadString);
+				
+				if(!TextUtils.isEmpty(payloadString))
+					payloadStrings.add(payloadString);
+			}
+		}
+		if (!payloadStrings.isEmpty()) {
+			Toast.makeText(Tags_magic.this, "Read from tags: " + TextUtils.join(
+					",",  payloadStrings), Toast.LENGTH_LONG);
+		}
+	}
+
+	private static final String MIME_TYPE = "application/com.andrew.mycloset";
+	//write to NFC tag intent!
+	private void processWriteIntent(Intent intent) {
+		if (isWriteReady && NfcAdapter.ACTION_TAG_DISCOVERED.equals(
+				getIntent().getAction())) {
+			
+			Tag detectTag = getIntent().getParcelableExtra(NfcAdapter.EXTRA_TAG);
+			String tagWriteMessage = Text.getText().toString();
+			byte[] payload = new String(tagWriteMessage).getBytes();
+			
+			if(detectTag !=null && NfcUtils.writeTag(
+					NfcUtils.createMessage(MIME_TYPE, payload), detectTag)) {
+				Toast.makeText(this,  "Wrote: "+ tagWriteMessage + " to a tag!", 
+						Toast.LENGTH_LONG).show();
+				setTagWriteReady(false);
+			} else {
+				Toast.makeText(this, "Write failed. Please try again. ", 
+						Toast.LENGTH_LONG).show();
+			}
+		}
+		
+	}
+
+
+}

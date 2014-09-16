@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="android.os.Handler"/>
+<fullyQualifiedTypeName name="com.example.pocketcloset.R.id"/>
+<fullyQualifiedTypeName name="android.widget.ToggleButton"/>
+<fullyQualifiedTypeName name="android.widget.CompoundButton"/>
+<fullyQualifiedTypeName name="android.app.PendingIntent"/>
+<fullyQualifiedTypeName name="android.view.Menu"/>
+<fullyQualifiedTypeName name="com.andrew.mycloset.R.menu"/>
+<fullyQualifiedTypeName name="android.widget.Button"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="android.nfc.NfcAdapter"/>
+<fullyQualifiedTypeName name="android.widget.ProgressBar"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="com.andrew.mycloset.R.id"/>
+<fullyQualifiedTypeName name="android.view.View.OnClickListener"/>
+<fullyQualifiedTypeName name="android.widget.Toast"/>
+<fullyQualifiedTypeName name="android.content.IntentFilter"/>
+<fullyQualifiedTypeName name="android.content.Intent"/>
+<fullyQualifiedTypeName name="android.nfc.Tag"/>
+<fullyQualifiedTypeName name="com.kinvey.android.Client"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,33 @@
+package com.andrew.mycloset;
+
+import android.nfc.NfcAdapter;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+
+public class Tags_magic extends Activity {
+	private Button EnableWriteButton;
+	private EditText Text;
+	private NfcAdapter myNfc;
+	private ProgressBar myProg;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tags_magic);
+		//initialize everything
+		Text = (EditText) findViewById(R.id.writeNFC);
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.tags_magic, menu);
+		return true;
+	}
+
+}

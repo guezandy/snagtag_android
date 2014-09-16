@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incorrect">Incorrect Password</string>
+    <string name="scan">Scan New Item</string>
+    <string name="goToCloset">Go to my Closet</string>
+</resources>

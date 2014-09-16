@@ -1,0 +1,82 @@
+package com.andrew.mycloset;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.nfc.*;
+import android.nfc.tech.*;
+
+	
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	
+	public class ScanScreen extends Activity {
+		public PendingIntent nfcPendingIntent;
+		public NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+		private ToggleButton nfcOn;
+		private boolean isEnabled;
+		@Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        setContentView(R.layout.scan_screen);
+	        nfcOn=(ToggleButton) findViewById(R.id.nfcToggle);
+	    }
+		/*
+		public void enableForegroundMode() {
+	        // foreground mode gives the current active application priority for reading scanned tags
+	        IntentFilter tagDetected = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED); // filter for tags
+	        IntentFilter[] writeTagFilters = new IntentFilter[] {tagDetected};
+	        adapter.enableForegroundDispatch(this, nfcPendingIntent, writeTagFilters, null);
+		}
+
+		public void disableForegroundMode() {
+			adapter.disableForegroundDispatch(this);
+		}
+		
+		@Override
+		public void onStart() {
+			System.out.println("Got into onstart!!");
+			super.onStart();
+		       if(adapter != null) {
+		        // true if enabled, false if not
+		        boolean isEnabled = adapter.isEnabled();
+		       }
+		       /*
+		       //if(isEnabled) { TODO LATER left it incomplete to do stuff without nfc
+		    	   System.out.println("-----Inside setup Function-----");
+		    	   nfcOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		    		   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		    			   if (isChecked) {
+		    				   System.out.println("-----Toggle Button On------");
+		    				   Toast.makeText(ScanScreen.this, "NFC Enabled", Toast.LENGTH_LONG).show();
+		    				   enableForegroundMode();
+		    				   
+		    			   } else {
+		    				   System.out.println("----Toggle button off-----");
+		    				   Toast.makeText(ScanScreen.this, "NFC Disabled", Toast.LENGTH_LONG).show();
+		    				   disableForegroundMode();
+		    			   }
+		    		   }
+		    	   });
+		    	  
+		       }
+		       
+		       //else {Toast.makeText(ScanScreen.this, "NFC not supported", Toast.LENGTH_LONG).show(); finish(); return}
+		@Override
+		public void onPause() {
+			super.onPause();
+				//if(NfcAdapter.getDefaultAdapter(this) != null)
+						//disableForegroundMode();
+			}
+			*/
+		}

@@ -1,0 +1,57 @@
+package com.andrew.mycloset;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.nfc.*;
+import android.nfc.tech.*;
+
+	
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	public class ScanScreen extends Activity {
+
+		private ToggleButton nfcOn;
+		private boolean isEnabled;
+		@Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        setContentView(R.layout.scan_screen);
+	        nfcOn=(ToggleButton) findViewById(R.id.nfcToggle);
+	        setUpNfc();
+	    }
+		private void setUpNfc() {
+			 NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
+		        // --- for API 10 only
+		       // NfcAdapter adapter = NfcAdapter.getDefaultAdapter(context);
+		       if(adapter != null) {
+		        // true if enabled, false if not
+		        boolean isEnabled = adapter.isEnabled();
+		       }
+		       //if(isEnabled) { TODO LATER
+		    	   System.out.println("-----Inside setup Function-----");
+		    	   nfcOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		    		   public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		    			   if (isChecked) {
+		    				   System.out.println("-----Toggle Button On------");
+		    				   Toast.makeText(ScanScreen.this, "NFC Enabled", Toast.LENGTH_LONG).show();
+		    				   // The toggle is enabled
+		    			   } else {
+		    				   System.out.println("----Toggle button off-----");
+		    				   Toast.makeText(ScanScreen.this, "NFC Disabled", Toast.LENGTH_LONG).show();
+		    				   // The toggle is disabled
+		    			   }
+		    		   }
+		    	   });
+		    	   
+		       }
+		       //else {}
+		}

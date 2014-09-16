@@ -1,0 +1,49 @@
+package com.andrew.mycloset;
+
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+import android.nfc.*;
+import android.nfc.tech.*;
+
+	
+public class ScanScreen extends Activity {
+	private Button nfcOn;
+		
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.scan_screen);
+	    
+	    System.out.println("Before Button defined");
+	    nfcOn=(Button) findViewById(R.id.nfcOn);
+	    nfcOn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(ScanScreen.this, "NFC Enabled", Toast.LENGTH_LONG).show();
+				
+			}
+		});
+	    System.out.println("OnCreate executed");
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+	
+	public void dostuff() {
+	}
+}

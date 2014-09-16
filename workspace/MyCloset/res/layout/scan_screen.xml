@@ -4,11 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ToggleButton
-        android:id="@+id/nfcToggle"
+    <Button
+        android:id="@+id/nfcOn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/scan"
-        android:textOff="@string/Scan"/>
+        android:text="@string/beam" />
 
+    <Button
+        android:id="@+id/writeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tagWriting" />
+
+    <Button
+        android:id="@+id/readButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nfcRead" />
+   
 </LinearLayout>
